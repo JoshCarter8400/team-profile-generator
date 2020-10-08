@@ -1,4 +1,4 @@
-const { writeFile, copyFile } = require("./src/generate-page.js");
+const { writeFile } = require("./src/generate-page.js");
 
 const createSite = require("./src/page-template.js");
 
@@ -34,32 +34,34 @@ const employeePrompt = () => {
     },
     {
       type: "input",
-      name: "link",
-      message:
-        "Please enter your office number for manager, School for Intern, or Github username for Engineer.",
-      validate: (infoInput) => {
-        if (infoInput) {
-          return true;
-        } else {
-          console.log("Please answer the question above.");
-          return false;
-        }
-      },
+      name: "office",
+      message: "If you're a manager please enter your office number.",
+    },
+    {
+      type: "input",
+      name: "github",
+      message: "If you're an engineer please enter your GitHub username.",
+    },
+    {
+      type: "input",
+      name: "school",
+      message: "If you're an intern please enter your school.",
     },
   ]);
 };
+
 employeePrompt().then((answers) => {
   console.log(answers);
 
-  var template = createSite(answers);
-  writeToFile("./dist/index.html", template);
+  var template = createSite;
+  writeFile("./dist/index.html", template);
 });
 
-function writeToFile(fileName, data) {
-  fs.writeFile(fileName, data, function (err) {
-    if (err) {
-      return console.log(err);
-    }
-    return console.log("success");
-  });
-}
+// function writeToFile(fileName, data) {
+//   fs.writeFile(fileName, data, function (err) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     return console.log("success");
+//   });
+// }
