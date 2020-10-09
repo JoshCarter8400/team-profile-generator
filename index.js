@@ -30,7 +30,7 @@ const managerPrompt = () => {
       type: "checkbox",
       name: "team",
       message: "Which type of team member would you like to add?",
-      choices: ["Manager", "Engineer", "Intern"],
+      choices: ["Manager", "Engineer", "Intern", "Complete Team"],
     },
   ]);
 };
@@ -61,7 +61,7 @@ const internPrompt = () => {
       type: "checkbox",
       name: "team",
       message: "Which type of team member would you like to add?",
-      choices: ["Manager", "Engineer", "Intern"],
+      choices: ["Manager", "Engineer", "Intern", "Complete Team"],
     },
   ]);
 };
@@ -89,22 +89,33 @@ const engineerPrompt = () => {
       message: "What is your engineer's GitHub username?",
     },
     {
-      type: "checkbox",
+      type: "list",
       name: "team",
       message: "Which type of team member would you like to add?",
-      choices: ["Manager", "Engineer", "Intern"],
+      choices: ["Manager", "Engineer", "Intern", "Complete Team"],
     },
   ]);
 };
 
-// employeePrompt().then((answers) => {
-//   console.log(answers);
+managerPrompt().then((managerAnswers) => {
+  console.log(managerAnswers);
+  if (managerAnswers.team[0] === "Engineer") {
+    engineerPrompt().then((answers) => {
+      console.log(answers);
+    });
+  } else if (managerAnswers.team[0] === "Intern") {
+    internPrompt().then((answers) => {
+      console.log(answers);
+    });
+  } else if (managerAnswers.team[0] === "Manager") {
+    managerPrompt().then((answers) => {
+      console.log(answers);
+    });
+  }
+  // writeFile(answers);
+});
 
-//   var template = createSite;
-//   writeFile("./dist/index.html", template);
-// });
-
-// function writeToFile(fileName, data) {
+// function writeFile(fileName, data) {
 //   fs.writeFile(fileName, data, function (err) {
 //     if (err) {
 //       return console.log(err);
