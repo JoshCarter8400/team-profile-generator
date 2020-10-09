@@ -4,58 +4,105 @@ const createSite = require("./src/page-template.js");
 
 const inquirer = require("inquirer");
 
-const employeePrompt = () => {
+const managerPrompt = () => {
   return inquirer.prompt([
     {
       type: "input",
+      name: "name",
+      message: "What is the team manager's name?",
+    },
+    {
+      type: "input",
       name: "ID",
-      message: "Please enter your ID number",
-      validate: (infoInput) => {
-        if (infoInput) {
-          return true;
-        } else {
-          console.log("Please Enter your ID number:");
-          return false;
-        }
-      },
+      message: "What is the team manager's ID?",
     },
     {
       type: "input",
       name: "email",
-      message: "Please enter your email address.",
-      validate: (infoInput) => {
-        if (infoInput) {
-          return true;
-        } else {
-          console.log("Please enter your email address");
-          return false;
-        }
-      },
+      message: "What is the team manager's email?",
     },
     {
       type: "input",
       name: "office",
-      message: "If you're a manager please enter your office number.",
+      message: "What is the team manager's office number?",
     },
     {
-      type: "input",
-      name: "github",
-      message: "If you're an engineer please enter your GitHub username.",
-    },
-    {
-      type: "input",
-      name: "school",
-      message: "If you're an intern please enter your school.",
+      type: "checkbox",
+      name: "team",
+      message: "Which type of team member would you like to add?",
+      choices: ["Manager", "Engineer", "Intern"],
     },
   ]);
 };
 
-employeePrompt().then((answers) => {
-  console.log(answers);
+const internPrompt = () => {
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is your intern's name?",
+    },
+    {
+      type: "input",
+      name: "ID",
+      message: "What is your intern's ID?",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "What is your intern's email?",
+    },
+    {
+      type: "input",
+      name: "office",
+      message: "What is your intern's school?",
+    },
+    {
+      type: "checkbox",
+      name: "team",
+      message: "Which type of team member would you like to add?",
+      choices: ["Manager", "Engineer", "Intern"],
+    },
+  ]);
+};
 
-  var template = createSite;
-  writeFile("./dist/index.html", template);
-});
+const engineerPrompt = () => {
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "What is your engineer's name?",
+    },
+    {
+      type: "input",
+      name: "ID",
+      message: "What is your engineer's ID?",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "What is your engineer's email?",
+    },
+    {
+      type: "input",
+      name: "github",
+      message: "What is your engineer's GitHub username?",
+    },
+    {
+      type: "checkbox",
+      name: "team",
+      message: "Which type of team member would you like to add?",
+      choices: ["Manager", "Engineer", "Intern"],
+    },
+  ]);
+};
+
+// employeePrompt().then((answers) => {
+//   console.log(answers);
+
+//   var template = createSite;
+//   writeFile("./dist/index.html", template);
+// });
 
 // function writeToFile(fileName, data) {
 //   fs.writeFile(fileName, data, function (err) {
