@@ -26,93 +26,101 @@ const managerPrompt = () => {
       name: "office",
       message: "What is the team manager's office number?",
     },
-    {
-      type: "checkbox",
-      name: "team",
-      message: "Which type of team member would you like to add?",
-      choices: ["Manager", "Engineer", "Intern", "Complete Team"],
-    },
   ]);
 };
 
-const internPrompt = () => {
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "What is your intern's name?",
-    },
-    {
-      type: "input",
-      name: "ID",
-      message: "What is your intern's ID?",
-    },
-    {
-      type: "input",
-      name: "email",
-      message: "What is your intern's email?",
-    },
-    {
-      type: "input",
-      name: "office",
-      message: "What is your intern's school?",
-    },
-    {
-      type: "checkbox",
-      name: "team",
-      message: "Which type of team member would you like to add?",
-      choices: ["Manager", "Engineer", "Intern", "Complete Team"],
-    },
-  ]);
-};
-
-const engineerPrompt = () => {
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "What is your engineer's name?",
-    },
-    {
-      type: "input",
-      name: "ID",
-      message: "What is your engineer's ID?",
-    },
-    {
-      type: "input",
-      name: "email",
-      message: "What is your engineer's email?",
-    },
-    {
-      type: "input",
-      name: "github",
-      message: "What is your engineer's GitHub username?",
-    },
-    {
-      type: "list",
-      name: "team",
-      message: "Which type of team member would you like to add?",
-      choices: ["Manager", "Engineer", "Intern", "Complete Team"],
-    },
-  ]);
-};
-
-managerPrompt().then((managerAnswers) => {
-  console.log(managerAnswers);
-  if (managerAnswers.team[0] === "Engineer") {
-    engineerPrompt().then((answers) => {
-      console.log(answers);
-    });
-  } else if (managerAnswers.team[0] === "Intern") {
-    internPrompt().then((answers) => {
-      console.log(answers);
-    });
-  } else if (managerAnswers.team[0] === "Manager") {
-    managerPrompt().then((answers) => {
-      console.log(answers);
-    });
+const internPrompt = (answers) => {
+  if (!answers.intern) {
+    answers.intern = [];
   }
-  // writeFile(answers);
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is your intern's name?",
+      },
+      {
+        type: "input",
+        name: "ID",
+        message: "What is your intern's ID?",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is your intern's email?",
+      },
+      {
+        type: "input",
+        name: "office",
+        message: "What is your intern's school?",
+      },
+    ])
+    .then((officeAnswers) => {
+      answers.intern.push(officeAnswers);
+      return promptChoice(answers);
+    });
+};
+
+const engineerPrompt = (answers) => {
+  if (!answers.engineer) {
+    answers.engineer = [];
+  }
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is your engineer's name?",
+      },
+      {
+        type: "input",
+        name: "ID",
+        message: "What is your engineer's ID?",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is your engineer's email?",
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "What is your engineer's GitHub username?",
+      },
+    ])
+    .then((officeAnswers) => {
+      answers.engineer.push(officeAnswers);
+      return promptChoice(answers);
+    });
+};
+
+const promptChoice = (answers) => {
+  return inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "team",
+        message: "Which type of team member would you like to add?",
+        choices: ["Engineer", "Intern", "Complete Team"],
+      },
+    ])
+    .then((choice) => {
+      if (choice.team.includes("Engineer")) {
+        console.log("Engineer");
+        return engineerPrompt(answers);
+      } else if (choice.team.includes("Intern")) {
+        console.log("Intern");
+        return internPrompt(answers);
+      } else if (choice.team.includes("Complete Team")) {
+        return writeFile(answers);
+      }
+    });
+};
+
+managerPrompt().then((answers) => {
+  console.log(answers.team);
+  promptChoice(answers);
 });
 
 // function writeFile(fileName, data) {
