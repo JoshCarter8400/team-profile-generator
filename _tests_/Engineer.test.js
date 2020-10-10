@@ -7,7 +7,7 @@ test("creates an engineer", () => {
   expect(engineer.getRole()).toEqual(expect.any(String));
 });
 
-test("get's name of engineer", () => {
+test("gets name of engineer", () => {
   expect(engineer.getName()).toEqual("Josh");
 });
 

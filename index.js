@@ -26,21 +26,54 @@ const managerPrompt = () => {
         type: "input",
         name: "name",
         message: "What is the team manager's name?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter a name");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "ID",
         message: "What is the team manager's ID?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter an ID number");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "email",
         message: "What is the team manager's email?",
+        validate: function (email) {
+          valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+          if (valid) {
+            return true;
+          } else {
+            console.log(".  Please enter a valid email");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "office",
         message: "What is the team manager's office number?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter an office number");
+            return false;
+          }
+        },
       },
     ])
     .then((answers) => {
@@ -63,16 +96,41 @@ const internPrompt = () => {
         type: "input",
         name: "name",
         message: "What is your intern's name?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter a name");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "ID",
         message: "What is your intern's ID?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter an ID number");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "email",
         message: "What is your intern's email?",
+        validate: function (email) {
+          valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+          if (valid) {
+            return true;
+          } else {
+            console.log(".  Please enter a valid email");
+            return false;
+          }
+        },
       },
       {
         type: "input",
@@ -99,21 +157,54 @@ const engineerPrompt = () => {
         type: "input",
         name: "name",
         message: "What is your engineer's name?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter a name");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "ID",
         message: "What is your engineer's ID?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter an ID number");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "email",
         message: "What is your engineer's email?",
+        validate: function (email) {
+          valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+          if (valid) {
+            return true;
+          } else {
+            console.log(".  Please enter a valid email");
+            return false;
+          }
+        },
       },
       {
         type: "input",
         name: "github",
         message: "What is your engineer's GitHub username?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log("Please enter your GitHub username");
+            return false;
+          }
+        },
       },
     ])
     .then((officeAnswers) => {
