@@ -1,24 +1,72 @@
 const fs = require("fs");
 
-const managerCard = () => {
+const Index = require("./index.js");
+
+const managerCard = (manager) => {
   console.log(this);
   return `
+  ${teamArr
+    .filter(({ manager }) => manager)
+    .map(({ name, id, email, office }) => {
+      return ` <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">${name}</h5>
+      <p class="card-text manager">Manger</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">${id}</li>
+      <li class="list-group-item"><a href="mailto:${email}"</a></li>
+      <li class="list-group-item">${office}</li>
+    </ul>
+    `;
+    })
+    .join("")}
+ `;
+};
+
+const engineerCard = (engineer) => {
+  console.log(this);
+  return `
+ ${teamArr
+   .filter(({ engineer }) => engineer)
+   .map(({ name, id, email, github }) => {
+     return `
   <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">${getName()}</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h5 class="card-title">${name}</h5>
+    <p class="card-text engineer">Engineer</p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item"></li>
-    <li class="list-group-item"></li>
-    <li class="list-group-item"></li>
+    <li class="list-group-item">${id}</li>
+    <li class="list-group-item"><a href="mailto:${email}"</a></li>
+    <li class="list-group-item"><a href="${github}"</li>
   </ul>
+</div>`;
+   })
+   .join("")}
+  `;
+};
+
+const internCard = (intern) => {
+  console.log(this);
+  return `
+ ${teamArr
+   .filter(({ intern }) => intern)
+   .map(({ name, id, email, office }) => {
+     return `
+  <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <h5 class="card-title">${name}</h5>
+    <p class="card-text intern">Intern</p>
   </div>
-</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">${id}</li>
+    <li class="list-group-item"><a href="mailto:${email}"</a></li>
+    <li class="list-group-item">${office}</li>
+  </ul>
+</div>`;
+   })
+   .join("")}
   `;
 };
 
@@ -43,6 +91,12 @@ const writeFile = (answers) => {
     <h1 class="display-4">GO TEAM!!</h1>
   </div>
 </div>
+
+<main>
+</main>
+${managerCard(manager)}
+${engineerCard(engineer)}
+${internCard(intern)}
 </body>
 
 </html>
@@ -76,4 +130,4 @@ const copyFile = () => {
   });
 };
 
-module.exports = { writeFile, copyFile };
+module.exports = { Index, writeFile, copyFile };

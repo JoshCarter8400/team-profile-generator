@@ -73,7 +73,7 @@ const internPrompt = (answers) => {
       },
       {
         type: "input",
-        name: "office",
+        name: "school",
         message: "What is your intern's school?",
       },
     ])
@@ -82,7 +82,7 @@ const internPrompt = (answers) => {
         officeAnswers.name,
         officeAnswers.ID,
         officeAnswers.email,
-        officeAnswers.office
+        officeAnswers.school
       );
       teamArr.push(intern);
       return promptChoice(answers);
