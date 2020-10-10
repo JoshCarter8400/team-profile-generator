@@ -1,8 +1,8 @@
 const fs = require("fs");
 
-const Index = require("./index.js");
+// const Index = require("./index.js");
 
-const managerCard = (manager) => {
+const managerCard = (teamArr) => {
   console.log(this);
   return `
   ${teamArr
@@ -24,7 +24,7 @@ const managerCard = (manager) => {
  `;
 };
 
-const engineerCard = (engineer) => {
+const engineerCard = (teamArr) => {
   console.log(this);
   return `
  ${teamArr
@@ -47,7 +47,7 @@ const engineerCard = (engineer) => {
   `;
 };
 
-const internCard = (intern) => {
+const internCard = (teamArr) => {
   console.log(this);
   return `
  ${teamArr
@@ -94,9 +94,9 @@ const writeFile = (answers) => {
 
 <main>
 </main>
-${managerCard(manager)}
-${engineerCard(engineer)}
-${internCard(intern)}
+${managerCard()}
+${engineerCard()}
+${internCard()}
 </body>
 
 </html>
@@ -130,4 +130,4 @@ const copyFile = () => {
   });
 };
 
-module.exports = { Index, writeFile, copyFile };
+module.exports = { writeFile, copyFile };
