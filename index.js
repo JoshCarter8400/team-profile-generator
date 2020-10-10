@@ -10,7 +10,8 @@ const Engineer = require("./lib/Engineer.js");
 
 const inquirer = require("inquirer");
 
-const teamArr = [];
+const teamArr = [],
+  idArray = [];
 
 const managerPrompt = () => {
   return inquirer
@@ -37,7 +38,14 @@ const managerPrompt = () => {
       },
     ])
     .then((answers) => {
-      console.log(answers.team);
+      const manager = new Manager(
+        answers.name,
+        answers.ID,
+        answers.email,
+        answers.office
+      );
+      teamArr.push(manager);
+      idArray.push(answers.ID);
       promptChoice(answers);
     });
 };
@@ -70,7 +78,13 @@ const internPrompt = (answers) => {
       },
     ])
     .then((officeAnswers) => {
-      answers.intern.push(officeAnswers);
+      const intern = new Intern(
+        officeAnswers.name,
+        officeAnswers.ID,
+        officeAnswers.email,
+        officeAnswers.office
+      );
+      teamArr.push(intern);
       return promptChoice(answers);
     });
 };
@@ -103,7 +117,13 @@ const engineerPrompt = (answers) => {
       },
     ])
     .then((officeAnswers) => {
-      answers.engineer.push(officeAnswers);
+      const engineer = new Engineer(
+        officeAnswers.name,
+        officeAnswers.ID,
+        officeAnswers.email,
+        officeAnswers.github
+      );
+      teamArr.push(engineer);
       return promptChoice(answers);
     });
 };
