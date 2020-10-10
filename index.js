@@ -2,31 +2,44 @@ const { writeFile } = require("./src/page-template.js");
 
 const createSite = require("./src/page-template.js");
 
+const Manager = require("./lib/Manager.js");
+
+const Intern = require("./lib/Intern.js");
+
+const Engineer = require("./lib/Engineer.js");
+
 const inquirer = require("inquirer");
 
+const teamArr = [];
+
 const managerPrompt = () => {
-  return inquirer.prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "What is the team manager's name?",
-    },
-    {
-      type: "input",
-      name: "ID",
-      message: "What is the team manager's ID?",
-    },
-    {
-      type: "input",
-      name: "email",
-      message: "What is the team manager's email?",
-    },
-    {
-      type: "input",
-      name: "office",
-      message: "What is the team manager's office number?",
-    },
-  ]);
+  return inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "What is the team manager's name?",
+      },
+      {
+        type: "input",
+        name: "ID",
+        message: "What is the team manager's ID?",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "What is the team manager's email?",
+      },
+      {
+        type: "input",
+        name: "office",
+        message: "What is the team manager's office number?",
+      },
+    ])
+    .then((answers) => {
+      console.log(answers.team);
+      promptChoice(answers);
+    });
 };
 
 const internPrompt = (answers) => {
@@ -117,12 +130,7 @@ const promptChoice = (answers) => {
       }
     });
 };
-
-managerPrompt().then((answers) => {
-  console.log(answers.team);
-  promptChoice(answers);
-});
-
+managerPrompt();
 // function writeFile(fileName, data) {
 //   fs.writeFile(fileName, data, function (err) {
 //     if (err) {
