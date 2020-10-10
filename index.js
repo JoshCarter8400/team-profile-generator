@@ -1,4 +1,10 @@
-const { writeFile } = require("./src/page-template.js");
+const fs = require("fs");
+
+const path = require("path");
+
+const outputDir = path.resolve(__dirname, "output");
+
+const outPutPath = path.join(outputDir, "index.html");
 
 const createSite = require("./src/page-template.js");
 
@@ -46,14 +52,11 @@ const managerPrompt = () => {
       );
       teamArr.push(manager);
       idArray.push(answers.ID);
-      promptChoice(answers);
+      promptChoice();
     });
 };
 
-const internPrompt = (answers) => {
-  if (!answers.intern) {
-    answers.intern = [];
-  }
+const internPrompt = () => {
   return inquirer
     .prompt([
       {
@@ -85,14 +88,11 @@ const internPrompt = (answers) => {
         officeAnswers.school
       );
       teamArr.push(intern);
-      return promptChoice(answers);
+      promptChoice();
     });
 };
 
-const engineerPrompt = (answers) => {
-  if (!answers.engineer) {
-    answers.engineer = [];
-  }
+const engineerPrompt = () => {
   return inquirer
     .prompt([
       {
@@ -124,11 +124,11 @@ const engineerPrompt = (answers) => {
         officeAnswers.github
       );
       teamArr.push(engineer);
-      return promptChoice(answers);
+      promptChoice();
     });
 };
 
-const promptChoice = (answers) => {
+const promptChoice = () => {
   return inquirer
     .prompt([
       {
@@ -139,18 +139,25 @@ const promptChoice = (answers) => {
       },
     ])
     .then((choice) => {
-      if (choice.team.includes("Engineer")) {
+      if (choice.team === "Engineer") {
         console.log("Engineer");
-        return engineerPrompt(answers);
-      } else if (choice.team.includes("Intern")) {
+        return engineerPrompt();
+      } else if (choice.team === "Intern") {
         console.log("Intern");
-        return internPrompt(answers);
-      } else if (choice.team.includes("Complete Team")) {
-        return writeFile(answers);
+        return internPrompt();
+      } else if (choice.team === "Complete Team") {
+        return makeSite();
       }
     });
 };
+const makeSite = () => {
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir);
+  }
+  fs.writeFileSync(outPutPath, createSite(teamArr), "utf-8");
+};
 managerPrompt();
+
 // function writeFile(fileName, data) {
 //   fs.writeFile(fileName, data, function (err) {
 //     if (err) {
