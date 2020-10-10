@@ -16,8 +16,8 @@ const Engineer = require("./lib/Engineer.js");
 
 const inquirer = require("inquirer");
 
-const teamArr = [],
-  idArray = [];
+const teamArr = [];
+const idArray = [];
 
 const managerPrompt = () => {
   return inquirer
@@ -157,12 +157,3 @@ const makeSite = () => {
   fs.writeFileSync(outPutPath, createSite(teamArr), "utf-8");
 };
 managerPrompt();
-
-// function writeFile(fileName, data) {
-//   fs.writeFile(fileName, data, function (err) {
-//     if (err) {
-//       return console.log(err);
-//     }
-//     return console.log("success");
-//   });
-// }
