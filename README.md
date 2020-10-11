@@ -3,9 +3,9 @@ This is a command line application that allows an officer manager to build his t
 Their answers are then used to generate an HTML file that displays in the browser. The manager is the able to send the employees an email and to clcik their github username to veiw their profile. 
 
 ## Table of Contents
-[Installation](#Installation)
-[Usage](#Usage)
-[Demo](#Demo)
+* [Installation](#Installation)
+* [Usage](#Usage)
+* [Demo](#Demo)
 
 ## Installation
     npm install inquirer  You can clone repo here git@github.com:JoshCarter8400/team-profile-generator.git
