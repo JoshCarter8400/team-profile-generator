@@ -1,14 +1,13 @@
 const draftTeam = (teamArr) => {
   const managerCard = (manager) => {
-    console.log(this);
     return `
    
-  <div class="card" style="width: 18rem;">
+    <div class="card shadow" style="width: 18rem;">
     <div class="card-body bg-primary">
       <h5 class="card-title">${manager.getName()}</h5>
       <p class="card-text manager"><i class="fas fa-briefcase"></i> Manager</p>
     </div>
-    <div class="list-container bg-secondary p-4">
+    <div class="container bg-secondary p-4">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${manager.getId()}</li>
       <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
@@ -20,19 +19,18 @@ const draftTeam = (teamArr) => {
   };
 
   const engineerCard = (engineer) => {
-    console.log(this);
     return `
    
-  <div class="card" style="width: 18rem;">
+    <div class="card shadow" style="width: 18rem;">
     <div class="card-body bg-primary">
       <h5 class="card-title">${engineer.getName()}</h5>
       <p class="card-text engineer"><i class="fas fa-tools"></i> Engineer</p>
     </div>
-    <div class="list-container bg-secondary p-4">
+    <div class="container bg-secondary p-4">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${engineer.getId()}</li>
       <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-      <li class="list-group-item">GitHub: <a href="${engineer.getGithub()}">${engineer.getGithub()}</a></li>
+      <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></li>
     </ul>
     </div>
   </div>
@@ -40,15 +38,14 @@ const draftTeam = (teamArr) => {
   };
 
   const internCard = (intern) => {
-    console.log(this);
     return `
    
-  <div class="card" style="width: 18rem;">
+  <div class="card shadow" style="width: 18rem;">
     <div class="card-body bg-primary">
       <h5 class="card-title">${intern.getName()}</h5>
       <p class="card-text intern"><i class="fas fa-coffee"></i> Intern</p>
     </div>
-    <div class="list-container bg-secondary p-4">
+    <div class="container bg-secondary p-4">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${intern.getId()}</li>
       <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
@@ -79,7 +76,7 @@ const draftTeam = (teamArr) => {
       .map((intern) => internCard(intern))
   );
 
-  return html.join("");
+  return html.join(" ");
 };
 
 module.exports = (teamArr) => {
