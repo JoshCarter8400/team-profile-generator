@@ -1,6 +1,6 @@
 # team-profile-generator
 This is a command line application that allows an officer manager to build his team through a series of prompts. They can select another manager, an engineer, and an intern.
-Their answers are then used to generate an HTML file that displays in the browser. The manager is the able to send the employees an email and to clcik their github username to veiw their profile. 
+Their answers are then used to generate an HTML file that displays in the browser. The manager is the able to send the employees an email and to click their github username to view their profile. 
 
 ## Table of Contents
 * [Installation](#Installation)
